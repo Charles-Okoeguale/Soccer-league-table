@@ -29,7 +29,7 @@ function App() {
     else return null
     })
   })
-  return obj ?? []
+  return obj
  })()
 
 
@@ -47,7 +47,7 @@ function App() {
     else return null
     })
   })
-  return obj ?? []
+  return obj
  })()
 
  const noDraws = (() => {
@@ -62,10 +62,9 @@ function App() {
       } else return null  
     })
   })
-  return obj ?? []
+  return obj
  })()
 
- console.log(noDraws)
 
   return (
     <div>
