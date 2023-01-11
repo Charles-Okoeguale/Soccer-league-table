@@ -13,10 +13,17 @@ function Table({Stats}) {
         {heading: 'Gd', value: 'Gd'},
         {heading: 'Points', value: 'Points'}
     ]
+    
+    const sorting = (() => {
+        const sorted = [...Stats].sort((a, b) => b.Points - a.Points || b.GD - a.GD);
+        Stats = sorted
+    })()
+
     const addRank = (() => {
         let counter = 1
         Stats.map((item) => item.Pos = counter ++)
       })()
+
   return (
     <div>
         <table>
