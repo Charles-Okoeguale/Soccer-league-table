@@ -65,6 +65,16 @@ function App() {
   return obj
  })()
 
+ const goalsFor = (() => {
+  let obj = {}
+  data.map((fixture) => {
+   for (let key in fixture.score) {
+     (!obj[key]) ? obj[key] = fixture.score[key] : obj[key] = obj[key] + fixture.score[key]
+    }
+  })
+  console.log(obj)
+ })()
+
 
   return (
     <div>
