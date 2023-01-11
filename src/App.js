@@ -1,5 +1,4 @@
 import React from 'react'
-import { useState } from 'react'
 import { data } from './data'
 
 function App() {
@@ -98,8 +97,37 @@ function App() {
   return obj
  })()
 
- console.log(goalsAgainst)
+ const individualStats = (() => {
+  let arr = [] 
+  listOfTeams.forEach((team) => {
+    let obj = {}
+    obj['name'] = team
+    if (noWins.hasOwnProperty(team)) {
+      for (let key in noWins) {
+       if (key === team) obj['win'] = noWins[key]
+      }
+    } else obj['win'] = 0
 
+    if (noLoss.hasOwnProperty(team)) {
+      for (let key in noLoss) {
+        if (key === team) obj['lost'] = noLoss[key]
+      }
+    } else obj['lost'] = 0
+
+    if (noDraws.hasOwnProperty(team)) {
+      for (let key in noDraws) {
+        if (key === team) obj['draw'] = noDraws[key]
+      }
+    } else obj['draw'] = 0
+    for (let key in goalsFor) {if (team === key) obj['Gf'] = goalsFor[key]}
+    for (let key in goalsAgainst) {if (team === key) obj['Ga'] = goalsAgainst[key]}
+    obj['Gd'] = obj['Gf'] - obj['Ga']
+    obj['Played'] = obj['win'] +  obj['draw'] + obj['lost']
+    obj['Points'] = obj['win'] * 3 + obj['draw'] * 1 - obj['lost'] * 3
+    arr.push(obj)
+  })
+  return arr
+ })()
 
   return (
     <div>
