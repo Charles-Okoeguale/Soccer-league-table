@@ -97,30 +97,30 @@ function App() {
   return obj
  })()
 
+const compute = (team, emptyObj, purpose, object) => {
+  if (Object.keys(object).length === 7) {
+    for (let key in object) {
+      if (team === key) emptyObj[purpose] = object[key]
+    }
+  } else {
+    if (object.hasOwnProperty(team)) {
+      for (let key in object) {
+        if (key === team) emptyObj[purpose] = object[key]
+      }
+    } else emptyObj[purpose] = 0
+  }
+}
+
  const individualStats = (() => {
   let arr = [] 
   listOfTeams.forEach((team) => {
     let obj = {}
     obj['name'] = team
-    if (noWins.hasOwnProperty(team)) {
-      for (let key in noWins) {
-       if (key === team) obj['win'] = noWins[key]
-      }
-    } else obj['win'] = 0
-
-    if (noLoss.hasOwnProperty(team)) {
-      for (let key in noLoss) {
-        if (key === team) obj['lost'] = noLoss[key]
-      }
-    } else obj['lost'] = 0
-
-    if (noDraws.hasOwnProperty(team)) {
-      for (let key in noDraws) {
-        if (key === team) obj['draw'] = noDraws[key]
-      }
-    } else obj['draw'] = 0
-    for (let key in goalsFor) {if (team === key) obj['Gf'] = goalsFor[key]}
-    for (let key in goalsAgainst) {if (team === key) obj['Ga'] = goalsAgainst[key]}
+    compute(team, obj, 'win', noWins)
+    compute(team, obj, 'lost', noLoss)
+    compute(team, obj, 'draw', noDraws)
+    compute(team, obj, 'Gf', goalsFor)
+    compute(team, obj, 'Ga', goalsAgainst)
     obj['Gd'] = obj['Gf'] - obj['Ga']
     obj['Played'] = obj['win'] +  obj['draw'] + obj['lost']
     obj['Points'] = obj['win'] * 3 + obj['draw'] * 1 - obj['lost'] * 3
@@ -128,7 +128,7 @@ function App() {
   })
   return arr
  })()
-
+ 
   return (
     <div>
       App
