@@ -13,6 +13,10 @@ function Table({Stats}) {
         {heading: 'Gd', value: 'Gd'},
         {heading: 'Points', value: 'Points'}
     ]
+    const addRank = (() => {
+        let counter = 1
+        Stats.map((item) => item.Pos = counter ++)
+      })()
   return (
     <div>
         <table>
