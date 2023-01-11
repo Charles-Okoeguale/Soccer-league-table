@@ -11,7 +11,7 @@ function App() {
       set.add(key)
     }
   })
-  return set ?? []
+  return set
  })()
 
 
@@ -72,8 +72,33 @@ function App() {
      (!obj[key]) ? obj[key] = fixture.score[key] : obj[key] = obj[key] + fixture.score[key]
     }
   })
-  console.log(obj)
+  return obj
  })()
+
+
+ const goalsAgainst = (() => {
+  let obj = {}
+  data.map((fixture) => {
+    Object.keys(fixture.score).reduce((a, e) => {
+      if (!obj[a] && !obj[e]) {
+        obj[a] = fixture.score[e]
+        obj[e] = fixture.score[a]
+      } else if (obj[a] && !obj[e]) {
+        obj[a] += fixture.score[e]
+        obj[e] = fixture.score[a]
+      } else if (!obj[a] && obj[e]) {
+        obj[a] = fixture.score[e]
+        obj[e] += fixture.score[a]
+      } else if (obj[a] && obj[e]) {
+        obj[a] += fixture.score[e]
+        obj[e] += fixture.score[a]
+      } else ;
+    })
+  })
+  return obj
+ })()
+
+ console.log(goalsAgainst)
 
 
   return (
