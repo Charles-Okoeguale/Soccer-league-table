@@ -1,9 +1,13 @@
-import React from 'react'
+import React, {useState, useContext} from 'react'
 import {data} from '../../data'
 import { format } from 'date-fns'
 import getTime from 'date-fns/getTime'
+import {useNavigate } from "react-router-dom";
+import { StateContext } from '../../App';
 
 function Table({Stats}) {
+  const {setFixtures, setPendingfixtures} = useContext(StateContext)
+    const navigate = useNavigate()
     const column = [
         {heading: 'Position', value: 'Pos'},
         {heading: 'name', value: 'name'},
@@ -41,8 +45,16 @@ function Table({Stats}) {
             }
         }
        })
-       console.log(played)
+        let sortFixtures = [...played].sort((a,b) => a.date - b.date)
+        let sortPendingFixtures = [...pending].sort((a, b) => a.date - b.date);
+        const sFixtures = sortFixtures.map((item) => ({...item, date: format(new Date(item.date), 'dd/MM, H:mm')}))
+        const pFixtures = sortPendingFixtures.map((item) => ({...item, date: format(new Date(item.date), 'dd/MM, H:mm')})) 
+        setFixtures(sFixtures)
+        setPendingfixtures(pFixtures)
+        navigate(`/${item.name}/fixtures`)
     }
+
+   
 
   return (
     <div>

@@ -1,13 +1,18 @@
-import React from 'react'
-import Table from './components/Table'
-import { individualStats } from './utils'
+import React, {createContext, useState} from "react";
+import Navigation from "./navigation";
+
+export const StateContext = createContext({})
+
+
 
 function App() {
+  const [fixtures, setFixtures] = useState()
+  const [pendingFixtures, setPendingfixtures] = useState()
   return (
-    <div>
-      <Table Stats={individualStats}/>
-    </div>
-  )
+    <StateContext.Provider value={{fixtures, setFixtures, pendingFixtures, setPendingfixtures}}>
+      <Navigation/>
+    </StateContext.Provider>
+  );
 }
 
-export default App
+export default App;
