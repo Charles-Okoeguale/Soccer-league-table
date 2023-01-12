@@ -6,7 +6,7 @@ import {useNavigate } from "react-router-dom";
 import { StateContext } from '../../App';
 
 function Table({Stats}) {
-  const {setFixtures, setPendingfixtures} = useContext(StateContext)
+  const {setFixtures, setTobeplayed} = useContext(StateContext)
     const navigate = useNavigate()
     const column = [
         {heading: 'Position', value: 'Pos'},
@@ -50,7 +50,7 @@ function Table({Stats}) {
         const sFixtures = sortFixtures.map((item) => ({...item, date: format(new Date(item.date), 'dd/MM, H:mm')}))
         const pFixtures = sortPendingFixtures.map((item) => ({...item, date: format(new Date(item.date), 'dd/MM, H:mm')})) 
         setFixtures(sFixtures)
-        setPendingfixtures(pFixtures)
+        setTobeplayed(pFixtures)
         navigate(`/${item.name}/fixtures`)
     }
 

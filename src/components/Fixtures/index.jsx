@@ -3,7 +3,7 @@ import { StateContext } from '../../App';
 import {useNavigate, useParams } from "react-router-dom";
 
 function Fixtures() { 
-    const {setFixtures, setPendingfixtures, fixtures, pendingfixtures} = useContext(StateContext)
+    const {fixtures, tobeplayed} = useContext(StateContext)
     const navigate = useNavigate()
     const {id} = useParams()
   return (
@@ -11,7 +11,7 @@ function Fixtures() {
         <button onClick={() => navigate(-1)}>Go to Table</button>
         <div className='container'>
             <h4>{id} Fixtures:</h4>
-            {/* {fixtures.map((item, index) => 
+            {fixtures.map((item, index) => 
                 <div key={index} className='fixtureBoard'>
                     {item['date']}
                     <div className='scoreBoard'>
@@ -25,11 +25,11 @@ function Fixtures() {
                         }
                     </div>
                 </div>
-            )} */}
+            )}
         </div>
         <div className='container'>
             <h4>{id}'s Fixtures still to be played:</h4>
-            {/* {pendingfixtures.map((item, index) => 
+            {tobeplayed.map((item, index) => 
             <div key={index} className='fixtureBoard'>
                 {item['date']}
                 <div className='scoreBoard'>
@@ -43,7 +43,7 @@ function Fixtures() {
                     }
                 </div>
             </div>
-            )} */}
+            )}
         </div>
     </>
   )

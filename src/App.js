@@ -7,9 +7,9 @@ export const StateContext = createContext({})
 
 function App() {
   const [fixtures, setFixtures] = useState()
-  const [pendingFixtures, setPendingfixtures] = useState()
+  const [tobeplayed, setTobeplayed] = useState()
   return (
-    <StateContext.Provider value={{fixtures, setFixtures, pendingFixtures, setPendingfixtures}}>
+    <StateContext.Provider value={{fixtures, setFixtures, tobeplayed, setTobeplayed}}>
       <Navigation/>
     </StateContext.Provider>
   );
